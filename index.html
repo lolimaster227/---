@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор сценариев развития бизнеса | Дачу-строй.рф</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1>Калькулятор сценариев развития бизнеса</h1>
+            <p class="header__subtitle">Дачу-строй.рф</p>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Главная страница -->
+            <section id="home" class="section section--home">
+                <div class="intro">
+                    <h2>Анализ сценариев развития строительного бизнеса</h2>
+                    <p>Интерактивная система планирования для оценки различных стратегий развития бизнеса в сфере загородного строительства. Сравните три сценария развития с различными уровнями инвестиций и рисков.</p>
+                </div>
+
+                <div class="scenarios-grid">
+                    <div class="scenario-card" data-scenario="conservative">
+                        <div class="scenario-card__header" style="background-color: #2E86AB;">
+                            <h3>Консервативный</h3>
+                            <div class="scenario-card__investment">1.7 млн ₽</div>
+                        </div>
+                        <div class="scenario-card__body">
+                            <p>Низкие риски, быстрый старт без производства</p>
+                            <ul class="scenario-features">
+                                <li>12 сделок в месяц</li>
+                                <li>Средний чек 200,000 ₽</li>
+                                <li>Минимальные инвестиции</li>
+                            </ul>
+                            <button class="btn btn--primary scenario-btn" data-scenario="conservative">
+                                Анализировать сценарий
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card" data-scenario="basic">
+                        <div class="scenario-card__header" style="background-color: #A23B72;">
+                            <h3>Базовый</h3>
+                            <div class="scenario-card__investment">4.7 млн ₽</div>
+                        </div>
+                        <div class="scenario-card__body">
+                            <p>Мини-производство, оптимальное соотношение риск/доходность</p>
+                            <ul class="scenario-features">
+                                <li>18 сделок в месяц</li>
+                                <li>Средний чек 300,000 ₽</li>
+                                <li>Собственное производство</li>
+                            </ul>
+                            <button class="btn btn--primary scenario-btn" data-scenario="basic">
+                                Анализировать сценарий
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="scenario-card" data-scenario="aggressive">
+                        <div class="scenario-card__header" style="background-color: #F18F01;">
+                            <h3>Агрессивный</h3>
+                            <div class="scenario-card__investment">12.5 млн ₽</div>
+                        </div>
+                        <div class="scenario-card__body">
+                            <p>Полное производство, максимальная прибыль и масштабирование</p>
+                            <ul class="scenario-features">
+                                <li>25 сделок в месяц</li>
+                                <li>Средний чек 350,000 ₽</li>
+                                <li>Полный производственный цикл</li>
+                            </ul>
+                            <button class="btn btn--primary scenario-btn" data-scenario="aggressive">
+                                Анализировать сценарий
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="overview-charts">
+                    <h3>Сравнительный анализ</h3>
+                    <div class="charts-grid">
+                        <div class="chart-container">
+                            <img src="https://pplx-res.cloudinary.com/image/upload/v1751006975/pplx_code_interpreter/9ff39acb_kz0vxt.jpg" alt="Сравнение чистой прибыли" class="chart-image">
+                        </div>
+                        <div class="chart-container">
+                            <img src="https://pplx-res.cloudinary.com/image/upload/v1751007027/pplx_code_interpreter/d3b84632_apm1xj.jpg" alt="Инвестиции и сроки окупаемости" class="chart-image">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <button class="btn btn--secondary" id="compare-all">Сравнить все сценарии</button>
+                </div>
+            </section>
+
+            <!-- Детальный анализ сценария -->
+            <section id="scenario-detail" class="section section--detail" style="display: none;">
+                <div class="detail-header">
+                    <button class="btn btn--outline back-btn" id="back-to-home">← Назад к обзору</button>
+                    <div class="scenario-tabs">
+                        <button class="tab-btn active" data-scenario="conservative">Консервативный</button>
+                        <button class="tab-btn" data-scenario="basic">Базовый</button>
+                        <button class="tab-btn" data-scenario="aggressive">Агрессивный</button>
+                    </div>
+                </div>
+
+                <div class="scenario-analysis">
+                    <div class="controls-panel">
+                        <h3>Параметры сценария: <span id="current-scenario-name">Консервативный</span></h3>
+                        
+                        <div class="control-group">
+                            <label class="form-label">Количество сделок в месяц: <span id="deals-value">12</span></label>
+                            <input type="range" id="deals-slider" class="slider" min="5" max="50" value="12">
+                        </div>
+
+                        <div class="control-group">
+                            <label class="form-label">Средний чек (₽)</label>
+                            <input type="number" id="avg-check-input" class="form-control" value="200000" min="50000" max="1000000" step="10000">
+                        </div>
+
+                        <div class="control-group">
+                            <label class="form-label">Себестоимость (%): <span id="cost-value">65</span>%</label>
+                            <input type="range" id="cost-slider" class="slider" min="40" max="80" value="65">
+                        </div>
+
+                        <div class="control-group">
+                            <label class="form-label">Постоянные расходы (₽)</label>
+                            <input type="number" id="fixed-costs-input" class="form-control" value="310000" min="100000" max="2000000" step="10000">
+                        </div>
+
+                        <div class="control-group">
+                            <label class="form-label">Маркетинговый бюджет (₽)</label>
+                            <input type="number" id="marketing-input" class="form-control" value="80000" min="20000" max="500000" step="5000">
+                        </div>
+
+                        <button class="btn btn--secondary" id="reset-scenario">Сбросить к исходным значениям</button>
+                    </div>
+
+                    <div class="results-panel">
+                        <div class="metrics-grid">
+                            <div class="metric-card">
+                                <h4>Выручка</h4>
+                                <div class="metric-value" id="revenue-month">2,400,000 ₽</div>
+                                <div class="metric-period">в месяц</div>
+                                <div class="metric-annual" id="revenue-year">28,800,000 ₽/год</div>
+                            </div>
+
+                            <div class="metric-card">
+                                <h4>Валовая прибыль</h4>
+                                <div class="metric-value" id="gross-profit-month">840,000 ₽</div>
+                                <div class="metric-period">в месяц</div>
+                                <div class="metric-annual" id="gross-profit-year">10,080,000 ₽/год</div>
+                            </div>
+
+                            <div class="metric-card">
+                                <h4>Чистая прибыль</h4>
+                                <div class="metric-value" id="net-profit-month">450,000 ₽</div>
+                                <div class="metric-period">в месяц</div>
+                                <div class="metric-annual" id="net-profit-year">5,400,000 ₽/год</div>
+                            </div>
+
+                            <div class="metric-card">
+                                <h4>ROI</h4>
+                                <div class="metric-value" id="roi-value">318%</div>
+                                <div class="metric-period">годовой</div>
+                            </div>
+
+                            <div class="metric-card">
+                                <h4>Срок окупаемости</h4>
+                                <div class="metric-value" id="payback-value">4</div>
+                                <div class="metric-period">месяца</div>
+                            </div>
+
+                            <div class="metric-card">
+                                <h4>Рентабельность</h4>
+                                <div class="metric-value" id="margin-value">35%</div>
+                                <div class="metric-period">по валовой прибыли</div>
+                            </div>
+                        </div>
+
+                        <div class="cost-breakdown">
+                            <h4>Структура расходов</h4>
+                            <div class="cost-item">
+                                <span>Себестоимость</span>
+                                <span id="variable-costs">1,560,000 ₽</span>
+                            </div>
+                            <div class="cost-item">
+                                <span>Постоянные расходы</span>
+                                <span id="fixed-costs-display">310,000 ₽</span>
+                            </div>
+                            <div class="cost-item">
+                                <span>Маркетинг</span>
+                                <span id="marketing-costs">80,000 ₽</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Сравнительная таблица -->
+            <section id="comparison" class="section section--comparison" style="display: none;">
+                <div class="comparison-header">
+                    <button class="btn btn--outline back-btn" id="back-to-home-2">← Назад к обзору</button>
+                    <h2>Сравнение всех сценариев</h2>
+                </div>
+
+                <div class="comparison-table-container">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Показатель</th>
+                                <th style="color: #2E86AB;">Консервативный</th>
+                                <th style="color: #A23B72;">Базовый</th>
+                                <th style="color: #F18F01;">Агрессивный</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Инвестиции</td>
+                                <td>1,700,000 ₽</td>
+                                <td>4,700,000 ₽</td>
+                                <td>12,500,000 ₽</td>
+                            </tr>
+                            <tr>
+                                <td>Сделки в месяц</td>
+                                <td>12</td>
+                                <td>18</td>
+                                <td>25</td>
+                            </tr>
+                            <tr>
+                                <td>Средний чек</td>
+                                <td>200,000 ₽</td>
+                                <td>300,000 ₽</td>
+                                <td>350,000 ₽</td>
+                            </tr>
+                            <tr>
+                                <td>Выручка (месяц)</td>
+                                <td id="comp-revenue-conservative">2,400,000 ₽</td>
+                                <td id="comp-revenue-basic">5,400,000 ₽</td>
+                                <td id="comp-revenue-aggressive">8,750,000 ₽</td>
+                            </tr>
+                            <tr>
+                                <td>Чистая прибыль (месяц)</td>
+                                <td id="comp-profit-conservative">450,000 ₽</td>
+                                <td id="comp-profit-basic">1,533,000 ₽</td>
+                                <td id="comp-profit-aggressive">2,675,000 ₽</td>
+                            </tr>
+                            <tr>
+                                <td>ROI (год)</td>
+                                <td id="comp-roi-conservative">318%</td>
+                                <td id="comp-roi-basic">391%</td>
+                                <td id="comp-roi-aggressive">257%</td>
+                            </tr>
+                            <tr>
+                                <td>Срок окупаемости</td>
+                                <td id="comp-payback-conservative">4 мес.</td>
+                                <td id="comp-payback-basic">3 мес.</td>
+                                <td id="comp-payback-aggressive">5 мес.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="comparison-charts">
+                    <div class="chart-container">
+                        <img src="https://pplx-res.cloudinary.com/image/upload/v1751007077/pplx_code_interpreter/bb0846ac_gydeq9.jpg" alt="Структура постоянных расходов" class="chart-image">
+                    </div>
+                </div>
+
+                <div class="export-section">
+                    <h3>Экспорт данных</h3>
+                    <p>Сохраните результаты анализа для дальнейшего использования</p>
+                    <button class="btn btn--primary" id="export-data">Скачать отчет (CSV)</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Дачу-строй.рф. Калькулятор сценариев развития бизнеса</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
